@@ -18,6 +18,8 @@ class MainActivity : AppCompatActivity() {
 
         val firstButton = findViewById<Button>(R.id.firstButton)
         val implicitButton = findViewById<Button>(R.id.implicitButton)
+        val lastViewActivityButton = findViewById<Button>(R.id.lastViewActivityButton)
+
         val nameControl = findViewById<EditText>(R.id.name)
 
         firstButton.setOnClickListener {
@@ -31,6 +33,11 @@ class MainActivity : AppCompatActivity() {
             val secondIntent = Intent(Intent.ACTION_VIEW)
             secondIntent.data = Uri.parse("https://www.youtube.com/watch?v=qU9mHegkTc4")
             startActivity(secondIntent)
+        }
+
+        lastViewActivityButton.setOnClickListener {
+            val firstIntent = Intent(this, ListViewActivity::class.java)
+            startActivity(firstIntent)
         }
 
     }
