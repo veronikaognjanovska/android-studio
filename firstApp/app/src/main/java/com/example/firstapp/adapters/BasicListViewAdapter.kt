@@ -31,17 +31,18 @@ class BasicListViewAdapter(val context: Context, val allStudents: MutableList<St
     }
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View? {
-        val view: View?
+        val view: View
         if (convertView == null) {
             view = layoutInflator.inflate(R.layout.list_view_row, null, false)
-            val currentStudent = allStudents[position]
-            val index = view.findViewById<TextView>(R.id.index)
-            val fullName = view.findViewById<TextView>(R.id.fullName)
-            index.text = currentStudent.index.toString()
-            fullName.text = currentStudent.name + " " + currentStudent.surname
         } else {
             view = convertView
         }
+
+        val currentStudent = allStudents[position]
+        val index = view.findViewById<TextView>(R.id.index)
+        val fullName = view.findViewById<TextView>(R.id.fullName)
+        index.text = currentStudent.index.toString()
+        fullName.text = currentStudent.name + " " + currentStudent.surname
 
         return view
     }
