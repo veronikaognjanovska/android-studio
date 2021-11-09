@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ExplicitActivity">
+
+    <Button
+        android:id="@+id/buttonOkay"
+        android:layout_width="269dp"
+        android:layout_height="44dp"
+        android:layout_marginTop="144dp"
+        android:backgroundTint="#009688"
+        android:onClick="okay"
+        android:text="ВО РЕД"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/inputText" />
+
+    <Button
+        android:id="@+id/buttonCancel"
+        android:layout_width="269dp"
+        android:layout_height="44dp"
+        android:layout_marginTop="56dp"
+        android:backgroundTint="#009688"
+        android:onClick="cancel"
+        android:text="ОТКАЖИ"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonOkay" />
+
+    <EditText
+        android:id="@+id/inputText"
+        android:layout_width="263dp"
+        android:layout_height="66dp"
+        android:layout_marginTop="152dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="124dp"
+        android:layout_height="32dp"
+        android:text="Enter text ..."
+        android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@+id/buttonOkay"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/inputText"
+        app:layout_constraintVertical_bias="0.0" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

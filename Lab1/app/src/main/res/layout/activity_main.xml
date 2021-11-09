@@ -7,12 +7,80 @@
     tools:context=".MainActivity">
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:id="@+id/resultExplicitText"
+        android:layout_width="269dp"
+        android:layout_height="27dp"
+        android:layout_marginTop="52dp"
+        android:text="Hello !"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textColor="#009688"
+        android:textSize="24sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/buttonExplicitActivity"
+        android:layout_width="269dp"
+        android:layout_height="44dp"
+        android:layout_marginTop="236dp"
+        android:backgroundTint="#009688"
+        android:text="Explicit Activity"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.528"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/resultExplicitText" />
+
+    <Button
+        android:id="@+id/buttonSelectImageActivity"
+        android:layout_width="269dp"
+        android:layout_height="44dp"
+        android:layout_marginTop="24dp"
+        android:backgroundTint="#009688"
+        android:text="Select Image Activity"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.528"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonSendActivity" />
+
+    <Button
+        android:id="@+id/buttonImplicitActivity"
+        android:layout_width="269dp"
+        android:layout_height="44dp"
+        android:layout_marginTop="24dp"
+        android:backgroundTint="#009688"
+        android:text="Implicit Activity"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.528"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonExplicitActivity" />
+
+    <Button
+        android:id="@+id/buttonSendActivity"
+        android:layout_width="269dp"
+        android:layout_height="44dp"
+        android:layout_marginTop="24dp"
+        android:backgroundTint="#009688"
+        android:text="SEND Activity"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.528"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonImplicitActivity" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="276dp"
+        android:layout_height="161dp"
+        app:layout_constraintBottom_toTopOf="@+id/buttonExplicitActivity"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/resultExplicitText"
+        app:layout_constraintVertical_bias="0.177" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
