@@ -22,6 +22,7 @@ class FirstFragment : Fragment() {
         button.setOnClickListener {
             activity?.supportFragmentManager?.beginTransaction()
                 ?.replace(R.id.container, SecondFragment())
+                ?.addToBackStack("Second")
                 ?.commit()
         }
 
