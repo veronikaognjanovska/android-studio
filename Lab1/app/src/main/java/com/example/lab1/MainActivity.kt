@@ -18,8 +18,6 @@ class MainActivity : AppCompatActivity() {
 
         this.setBundle(intent.extras)
         this.setListeners()
-
-
     }
 
     private fun setBundle(bundle: Bundle?) {
@@ -38,6 +36,12 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        val buttonImplicitActivity = findViewById<Button>(R.id.buttonImplicitActivity)
+        buttonImplicitActivity.setOnClickListener {
+            val intent = Intent("mk.ukim.finki.mpip.IMPLICIT_ACTION")
+            startActivity(intent)
+        }
+
         val buttonSendActivity = findViewById<Button>(R.id.buttonSendActivity)
         buttonSendActivity.setOnClickListener {
             val intent = Intent(Intent.ACTION_SEND)
@@ -51,39 +55,25 @@ class MainActivity : AppCompatActivity() {
         buttonSelectImageActivity.setOnClickListener {
             val intent = Intent(Intent.ACTION_PICK)
             intent.type = "image/*"
-            intent.putExtra(Intent.EXTRA_TEXT, "Pick_Image")
-//            getResult.launch(intent)
-
-            fileChooserContract.launch("image/*")
+            getSelectedImageResult.launch(intent)
         }
     }
 
-    private val fileChooserContract =
-        registerForActivityResult(ActivityResultContracts.GetContent()) { imageUri ->
-            if (imageUri != null) {
-                // imageUri now contains URI to selected image
-                try {
-                    val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, imageUri)
-                    val imageView: ImageView = findViewById(R.id.imageView)
-                    imageView.setImageBitmap(bitmap)
-                } catch (e: IOException) {
-                    e.printStackTrace()
+    private val getSelectedImageResult =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { it ->
+            if (it.resultCode == Activity.RESULT_OK) {
+                val selectedFileUri = it.data?.data
+                if (selectedFileUri != null) {
+                    // selectedFileUri now contains URI to selected image
+                    try {
+                        val bitmap =
+                            MediaStore.Images.Media.getBitmap(contentResolver, selectedFileUri)
+                        val imageView: ImageView = findViewById(R.id.imageView)
+                        imageView.setImageBitmap(bitmap)
+                    } catch (e: IOException) {
+                        e.printStackTrace()
+                    }
                 }
             }
-        }
-
-
-    private val getResult =
-        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-            if (it.resultCode == Activity.RESULT_OK && it.data?.extras != null) {
-                //...
-            }
-
-            val p1 = it.resultCode
-            val p2 = it.data
-            val p4 = it.data?.flags
-            val p5 = it.data?.extras
-            val s = 1
-
         }
 }
