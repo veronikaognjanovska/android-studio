@@ -18,7 +18,9 @@ class MainActivity : AppCompatActivity() {
 
         val firstButton = findViewById<Button>(R.id.firstButton)
         val implicitButton = findViewById<Button>(R.id.implicitButton)
-        val lastViewActivityButton = findViewById<Button>(R.id.lastViewActivityButton)
+        val listViewActivityButton = findViewById<Button>(R.id.listViewActivityButton)
+        val recycleViewActivityButton = findViewById<Button>(R.id.recycleViewActivityButton)
+        val fragmentActivityButton = findViewById<Button>(R.id.fragmentActivityButton)
 
         val nameControl = findViewById<EditText>(R.id.name)
 
@@ -35,8 +37,18 @@ class MainActivity : AppCompatActivity() {
             startActivity(secondIntent)
         }
 
-        lastViewActivityButton.setOnClickListener {
+        listViewActivityButton.setOnClickListener {
             val firstIntent = Intent(this, ListViewActivity::class.java)
+            startActivity(firstIntent)
+        }
+
+        recycleViewActivityButton.setOnClickListener {
+            val firstIntent = Intent(this, RecycleViewActivity::class.java)
+            startActivity(firstIntent)
+        }
+
+        fragmentActivityButton.setOnClickListener {
+            val firstIntent = Intent(this, FragmentActivity::class.java)
             startActivity(firstIntent)
         }
 

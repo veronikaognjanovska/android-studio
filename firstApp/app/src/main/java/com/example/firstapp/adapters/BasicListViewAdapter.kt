@@ -40,7 +40,7 @@ class BasicListViewAdapter(val context: Context, val allStudents: MutableList<St
 
         val currentStudent = allStudents[position]
         val index = view.findViewById<TextView>(R.id.index)
-        val fullName = view.findViewById<TextView>(R.id.fullName)
+        val fullName = view.findViewById<TextView>(R.id.firstName)
         index.text = currentStudent.index.toString()
         fullName.text = currentStudent.name + " " + currentStudent.surname
 

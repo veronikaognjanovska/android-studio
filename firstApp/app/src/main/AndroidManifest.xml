@@ -9,7 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.FirstApp">
-        <activity android:name=".ListViewActivity"></activity>
+        <activity android:name=".FragmentActivity"></activity>
+        <activity android:name=".RecycleViewActivity" />
+        <activity android:name=".ListViewActivity" />
         <activity android:name=".FirstActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
