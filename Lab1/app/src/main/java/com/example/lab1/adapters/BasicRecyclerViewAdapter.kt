@@ -19,8 +19,18 @@ class BasicRecyclerViewAdapter(
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val itemText: TextView = view.findViewById(R.id.itemText)
-
     }
+
+    interface OnItemClickListener {
+        fun onItemClick(item: ResolveInfo)
+    }
+
+    fun setExampleDialogListener(listener: OnItemClickListener) {
+        this.listener = listener
+    }
+
+    private lateinit var listener: OnItemClickListener
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
@@ -34,6 +44,7 @@ class BasicRecyclerViewAdapter(
             packageManager?.let {
                 currentItem.activityInfo.applicationInfo.loadLabel(it).toString()
             }
+        holder.itemView.setOnClickListener(View.OnClickListener { listener.onItemClick(currentItem) })
     }
 
     override fun getItemCount(): Int {
