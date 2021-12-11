@@ -1,10 +1,10 @@
 package com.example.retrofitapp.models
 
 class Track {
-    val tracks: MutableList<Data>
+    val data: MutableList<Data>
 
-    constructor(tracks: MutableList<Data>) {
-        this.tracks = tracks
+    constructor(data: MutableList<Data>) {
+        this.data = data
     }
 
 }

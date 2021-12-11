@@ -10,10 +10,14 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.retrofitapp.adapters.TrackAdapter
 import com.example.retrofitapp.api.DeezerApi
 import com.example.retrofitapp.api.DeezerApiClient
 import com.example.retrofitapp.databinding.FragmentFirstBinding
+import com.example.retrofitapp.models.Data
 import com.example.retrofitapp.models.Playlist
 import retrofit2.Call
 import retrofit2.Callback
@@ -29,6 +33,9 @@ class FirstFragment : Fragment() {
     private lateinit var deezerApiClient: DeezerApi
     private lateinit var textViewPlaylistTitle: TextView
     private lateinit var imageViewPlaylistPicture: ImageView
+    private lateinit var trackRecyclerView: RecyclerView
+    private lateinit var recyclerViewAdapter: TrackAdapter
+
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -53,6 +60,12 @@ class FirstFragment : Fragment() {
         var playlistId: EditText = view.findViewById<EditText>(R.id.editTextPlaylistID)
         this.textViewPlaylistTitle = view.findViewById<TextView>(R.id.textViewPLaylistTitle)
         this.imageViewPlaylistPicture = view.findViewById<ImageView>(R.id.imageViewPlaylistPicture)
+
+        this.trackRecyclerView = view.findViewById(R.id.allTracksRecyclerView)
+        this.trackRecyclerView.layoutManager = LinearLayoutManager(activity)
+        this.recyclerViewAdapter =
+            TrackAdapter(requireActivity().applicationContext, mutableListOf<Data>())
+        this.trackRecyclerView.adapter = this.recyclerViewAdapter
 
         playlistId.setOnEditorActionListener { v, actionId, event ->
             if (actionId == EditorInfo.IME_ACTION_DONE || actionId == EditorInfo.IME_ACTION_NEXT) {
@@ -85,6 +98,7 @@ class FirstFragment : Fragment() {
     private fun displayData(data: Playlist) {
         textViewPlaylistTitle.text = data.title
         Glide.with(this).load(data.picture).into(imageViewPlaylistPicture)
+        this.recyclerViewAdapter.updateData(data.tracks.data)
     }
 
     override fun onDestroyView() {
