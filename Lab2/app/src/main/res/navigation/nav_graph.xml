@@ -23,4 +23,13 @@
             android:id="@+id/action_FragmentMovieDetails_to_FragmentMovieList"
             app:destination="@id/FragmentMovieList" />
     </fragment>
+    <fragment
+        android:id="@+id/addNewMovieFragment"
+        android:name="com.example.lab2.AddNewMovieFragment"
+        android:label="@string/add_new_movie_fragment_label"
+        tools:layout="@layout/fragment_add_new_movie" >
+        <action
+            android:id="@+id/action_addNewMovieFragment_to_FragmentMovieList"
+            app:destination="@id/FragmentMovieList" />
+    </fragment>
 </navigation>

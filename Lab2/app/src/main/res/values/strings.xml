@@ -8,4 +8,6 @@
     <string name="previous">Previous</string>
 
     <string name="id_label">ID: %1$s</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="add_new_movie_fragment_label">New</string>
 </resources>

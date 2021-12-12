@@ -26,4 +26,8 @@ class MovieFakeApi {
         return this.movies
     }
 
+    fun addNewMovie(movie: Movie): Unit {
+        this.movies.add(movie)
+    }
+
 }
