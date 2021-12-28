@@ -1,10 +1,11 @@
 package com.example.retrofitapp.database.dao
 
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
+import androidx.room.*
+import com.example.retrofitapp.database.relationship.PlaylistWithTracks
 import com.example.retrofitapp.models.Data
 import com.example.retrofitapp.models.Playlist
 
+@Dao
 abstract class PlaylistDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     abstract fun insertPlaylist(playlist: Playlist)
@@ -23,4 +24,8 @@ abstract class PlaylistDao {
             ex.printStackTrace()
         }
     }
+
+    @Transaction
+    @Query("SELECT * FROM Playlist WHERE id=:id")
+    abstract fun getPlaylistWithTracks(id: Long): PlaylistWithTracks?
 }

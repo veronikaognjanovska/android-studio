@@ -5,11 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
-import android.widget.EditText
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -19,9 +19,7 @@ import com.example.retrofitapp.api.DeezerApiClient
 import com.example.retrofitapp.databinding.FragmentFirstBinding
 import com.example.retrofitapp.models.Data
 import com.example.retrofitapp.models.Playlist
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import com.example.retrofitapp.viewmodel.FirstFragmentViewModel
 
 
 /**
@@ -35,6 +33,8 @@ class FirstFragment : Fragment() {
     private lateinit var imageViewPlaylistPicture: ImageView
     private lateinit var trackRecyclerView: RecyclerView
     private lateinit var recyclerViewAdapter: TrackAdapter
+
+    private lateinit var firstFragmentViewModel: FirstFragmentViewModel
 
 
     // This property is only valid between onCreateView and
@@ -54,6 +54,19 @@ class FirstFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        this.firstFragmentViewModel =
+            ViewModelProvider(this).get(FirstFragmentViewModel::class.java)
+        this.firstFragmentViewModel.getPlaylistMutableLiveData()
+            .observe(viewLifecycleOwner, object : Observer<Playlist?> {
+                override fun onChanged(t: Playlist?) {
+                    if (t != null) {
+                        displayData(t)
+                    } else {
+                        Toast.makeText(activity, "Error!", Toast.LENGTH_LONG).show()
+                    }
+                }
+            })
+
         // !! - there will be a implementation in any case
         this.deezerApiClient = DeezerApiClient.getDeezerApi()!!
 
@@ -70,30 +83,35 @@ class FirstFragment : Fragment() {
         playlistId.setOnEditorActionListener { v, actionId, event ->
             if (actionId == EditorInfo.IME_ACTION_DONE || actionId == EditorInfo.IME_ACTION_NEXT) {
                 val listId: String = playlistId.text.toString()
-                searchPlaylistById(listId)
+                this.firstFragmentViewModel.searchPlaylistById(listId)
                 true
             } else {
                 Toast.makeText(activity, "Error!", Toast.LENGTH_LONG).show()
                 false
             }
         }
+
+        var secondFragmentButton: Button = view.findViewById<Button>(R.id.secondFragmentActivity)
+        secondFragmentButton.setOnClickListener {
+            findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
+        }
     }
 
-    private fun searchPlaylistById(id: String) {
-        this.deezerApiClient.getPlaylistById(id).enqueue(object : Callback<Playlist> {
-            override fun onResponse(call: Call<Playlist>?, response: Response<Playlist>) {
-                displayData(response.body())
-                if (response.code() == 200) {
-                    Toast.makeText(activity, "Success!", Toast.LENGTH_LONG).show()
-                }
-            }
-
-            override fun onFailure(call: Call<Playlist>?, t: Throwable?) {
-                Toast.makeText(activity, "Error!", Toast.LENGTH_LONG).show()
-            }
-
-        })
-    }
+//    private fun searchPlaylistById(id: String) {
+//        this.deezerApiClient.getPlaylistById(id).enqueue(object : Callback<Playlist> {
+//            override fun onResponse(call: Call<Playlist>?, response: Response<Playlist>) {
+//                displayData(response.body())
+//                if (response.code() == 200) {
+//                    Toast.makeText(activity, "Success!", Toast.LENGTH_LONG).show()
+//                }
+//            }
+//
+//            override fun onFailure(call: Call<Playlist>?, t: Throwable?) {
+//                Toast.makeText(activity, "Error!", Toast.LENGTH_LONG).show()
+//            }
+//
+//        })
+//    }
 
     private fun displayData(data: Playlist) {
         textViewPlaylistTitle.text = data.title
@@ -105,4 +123,6 @@ class FirstFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
+    //3773404202
+//    1578812305
 }

@@ -4,21 +4,10 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity
-class Data {
-    // Song
+// Song
+class Data(
     @PrimaryKey
-    var id: Long
-    var title: String
-
-    var playlistId: Long
-        get() = playlistId
-        set(value) {
-            playlistId = value
-        }
-
-    constructor(id: Long, title: String) {
-        this.id = id
-        this.title = title
-    }
-
-}
+    var id: Long = 0,
+    var title: String = "",
+    var playlistId: Long = 0,
+)
