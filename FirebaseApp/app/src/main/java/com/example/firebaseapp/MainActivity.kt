@@ -1,15 +1,17 @@
 package com.example.firebaseapp
 
+import android.content.Intent
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
+import android.view.Menu
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
-import android.view.Menu
-import android.view.MenuItem
 import com.example.firebaseapp.databinding.ActivityMainBinding
+import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.auth.FirebaseAuth
 
 class MainActivity : AppCompatActivity() {
 
@@ -45,7 +47,11 @@ class MainActivity : AppCompatActivity() {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         return when (item.itemId) {
-            R.id.action_settings -> true
+            R.id.action_logout -> {
+                FirebaseAuth.getInstance().signOut()
+                navigateOut()
+                return true
+            }
             else -> super.onOptionsItemSelected(item)
         }
     }
@@ -55,4 +61,22 @@ class MainActivity : AppCompatActivity() {
         return navController.navigateUp(appBarConfiguration)
                 || super.onSupportNavigateUp()
     }
+
+    override fun onStart() {
+        super.onStart()
+        if (!checkIfLoggedIn()) {
+            navigateOut()
+        }
+    }
+
+    private fun checkIfLoggedIn(): Boolean {
+        return FirebaseAuth.getInstance().currentUser != null
+    }
+
+    private fun navigateOut() {
+        val intent: Intent = Intent(this, LoginActivity::class.java)
+        startActivity(intent)
+        finish()
+    }
+
 }
